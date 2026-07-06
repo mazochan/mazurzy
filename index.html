@@ -11,15 +11,22 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:black;
-    color:white;
+    background:white;
+    color:black;
     font-family:Arial;
+    filter: invert(1);
 }
 
-#popup{
+#popup, #loading{
     text-align:center;
     padding:30px;
-    border:1px solid white;
+    border:1px solid black;
+    background:white;
+}
+
+#loading{
+    display:none;
+    font-size:20px;
 }
 </style>
 
@@ -32,14 +39,27 @@ body{
     <button onclick="start()">Wejdź</button>
 </div>
 
+<div id="loading">Praca w toku.</div>
+
 <audio id="muzyka" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+let dots = 0;
+let interval;
+
 function start(){
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("loading").style.display = "block";
+
     document.getElementById("muzyka").play();
-    document.getElementById("popup").style.display="none";
+
+    interval = setInterval(() => {
+        dots = (dots + 1) % 4;
+        document.getElementById("loading").innerText =
+            "Praca w toku" + ".".repeat(dots);
+    }, 500);
 }
 </script>
 
