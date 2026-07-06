@@ -7,60 +7,58 @@
 <style>
 body{
     margin:0;
+    background:black;
+    overflow:hidden;
+}
+
+video{
+    width:100vw;
     height:100vh;
+    object-fit:cover;
+}
+
+/* ikona dźwięku */
+#soundBtn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.2);
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:white;
-    color:black;
-    font-family:Arial;
-    filter: invert(1);
-}
-
-#popup, #loading{
-    text-align:center;
-    padding:30px;
-    border:1px solid black;
-    background:white;
-}
-
-#loading{
-    display:none;
-    font-size:20px;
+    font-size:24px;
+    cursor:pointer;
+    user-select:none;
+    backdrop-filter: blur(5px);
 }
 </style>
 
 </head>
 <body>
 
-<div id="popup">
-    <h2>Witaj!</h2>
-    <p>Kliknij, aby wejść na stronę</p>
-    <button onclick="start()">Wejdź</button>
-</div>
+<video id="film" autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+</video>
 
-<div id="loading">Praca w toku.</div>
-
-<audio id="muzyka" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div id="soundBtn">🔊</div>
 
 <script>
-let dots = 0;
-let interval;
+const video = document.getElementById("film");
+const btn = document.getElementById("soundBtn");
 
-function start(){
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("loading").style.display = "block";
+btn.addEventListener("click", () => {
+    video.muted = !video.muted;
 
-    document.getElementById("muzyka").play();
-
-    interval = setInterval(() => {
-        dots = (dots + 1) % 4;
-        document.getElementById("loading").innerText =
-            "Praca w toku" + ".".repeat(dots);
-    }, 500);
-}
+    if(video.muted){
+        btn.innerText = "🔊";
+    } else {
+        btn.innerText = "🔇";
+    }
+});
 </script>
 
 </body>
