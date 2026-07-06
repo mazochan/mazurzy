@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Mazurzy</title>
+<meta charset="UTF-8">
+<title>Moja strona</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:black;
+    color:white;
+    font-family:Arial;
+}
+
+#popup{
+    text-align:center;
+    padding:30px;
+    border:1px solid white;
+}
+</style>
+
 </head>
 <body>
-  <h1>Witaj na mazurzy.pl!</h1>
+
+<div id="popup">
+    <h2>Witaj!</h2>
+    <p>Kliknij, aby wejść na stronę</p>
+    <button onclick="start()">Wejdź</button>
+</div>
+
+<audio id="muzyka" loop>
+    <source src="muzyka.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function start(){
+    document.getElementById("muzyka").play();
+    document.getElementById("popup").style.display="none";
+}
+</script>
+
 </body>
 </html>
