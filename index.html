@@ -2,63 +2,84 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>mazurzy.pl</title>
+<title>start</title>
+
+<!-- font w stylu Windows 7 -->
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    background:black;
-    overflow:hidden;
-}
-
-video{
-    width:100vw;
     height:100vh;
-    object-fit:cover;
-}
-
-/* ikona dźwięku */
-#soundBtn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.2);
-    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:24px;
+    background: linear-gradient(135deg, #7fffd4, #00bcd4);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* ekran wejścia */
+#start{
+    text-align:center;
+    color:white;
+    padding:40px;
+    border:2px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.2);
+    border-radius:10px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:18px;
     cursor:pointer;
-    user-select:none;
-    backdrop-filter: blur(5px);
+    border:none;
+    border-radius:5px;
+}
+
+/* video fullscreen */
+#videoContainer{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background:black;
+}
+
+video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 </style>
 
 </head>
 <body>
 
-<video id="film" autoplay muted loop>
-    <source src="video.mp4" type="video/mp4">
-</video>
+<div id="start">
+    <h2>Witaj</h2>
+    <p>Kliknij „Wejdź”</p>
+    <button onclick="enter()">Wejdź</button>
+</div>
 
-<div id="soundBtn">🔊</div>
+<div id="videoContainer">
+    <video id="video" loop>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+</div>
 
 <script>
-const video = document.getElementById("film");
-const btn = document.getElementById("soundBtn");
+function enter(){
+    document.getElementById("start").style.display = "none";
+    document.getElementById("videoContainer").style.display = "block";
 
-btn.addEventListener("click", () => {
-    video.muted = !video.muted;
+    const video = document.getElementById("video");
 
-    if(video.muted){
-        btn.innerText = "🔊";
-    } else {
-        btn.innerText = "🔇";
-    }
-});
+    video.play().catch(err => {
+        console.log("Autoplay zablokowany:", err);
+    });
+}
 </script>
 
 </body>
